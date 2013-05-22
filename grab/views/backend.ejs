@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Junction | <%- person %> - backend</title>
+ 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/2.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/2.2.1/js/bootstrap.min.js">
+	<link rel="stylesheet" type="text/css" href="/assets/css/site.css">
+	<style>
+	textarea { width:98%; }
+	</style>
+</head>
+<body>
+
+<div id="identities" class="content">
+	<nav class="clearfix container">
+		<h1 class="pull-right">The backend | <%- person %></h1>
+	</nav>
+
+	<div class="container view">
+		<% profiles.forEach(function(p) { %>
+		<div>
+			<h2><%= p.type %></h2>
+			<input type="hidden" value="/<%= p.type %>" name="url" />
+
+			<textarea name="feed"
+				rows="6"><%= JSON.stringify(p.feed, null, '\t') %></textarea>
+			<a name="refresh"
+				rel="<%= p.auth %>" href="/<%= p.type %>"
+				class="btn btn-primary">Grab data</a>
+			<button type="submit" name="save" class="btn">Update identity</button>
+		</div>
+		<% }) %>
+	</div>
+</div>
+
+<script type="text/javascript">
+function start() {
+	$('#identities').on('click', 'button[name=save]', function (e) {
+		e.preventDefault();
+		var btn = $(e.currentTarget);
+		var url = $(this).siblings('input[name=url]').val();
+		var payload = $(this).siblings('[name=feed]').val();
+		try {
+			var json = $.parseJSON(payload);
+			if (!json || $.isEmptyObject(json))
+				throw 'empty...';
+			btn.addClass('btn-inverse');
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: {feed: json},
+				success: function() {
+					btn.removeClass('btn-inverse').addClass('btn-success');
+				},
+				error: function() {
+					btn.removeClass('btn-inverse').addClass('btn-danger');
+				}
+			});
+		}
+		catch (e) {
+			btn.addClass('btn-danger');
+			if (console)
+				console.log(e.message);
+		}
+	});
+
+	$('#identities').on('click', '[name=refresh][rel!=oauth]', function (e) {
+		e.preventDefault();
+		var btn = $(e.currentTarget);
+		var url = $(this).siblings('input[name=url]').val();
+		btn.addClass('btn-inverse');
+		$.ajax({
+			url: url,
+			type: 'get',
+			success: function() {
+				btn.removeClass('btn-inverse').addClass('btn-success');
+			},
+			error: function() {
+				btn.removeClass('btn-inverse').addClass('btn-danger');
+			}
+		});
+	});
+}
+
+$('document').ready(function() {
+	start();
+});
+</script>
+
+</body>
+</html>

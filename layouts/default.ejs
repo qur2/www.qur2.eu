@@ -1,0 +1,22 @@
+<% layout('boilerplate') -%>
+
+<div class="menu">
+	<div class="container">
+		<nav class="clearfix">
+			<h1 class="pull-right"><%= person %></h1>
+			<ul class="nav nav-tabs">
+			<% profiles.forEach(function(p) { -%>
+			<li class="<%= p === active_profile ? 'active' : '' %>">
+				<a href="/<%= p %>" class="icon">
+					<img src="/assets/img/<%= p %>-48x48.png" />
+				</a>
+			</li>
+			<% }) -%>
+		</ul>
+		</nav>
+	</div>
+</div>
+
+<div class="container view">
+<%- content -%>
+</div>

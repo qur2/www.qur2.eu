@@ -1,0 +1,15 @@
+<section class="twitter">
+  <div class="tweets">
+    <% data.tweets.forEach(function (tweet, i) { %>
+    <div class="tweet">
+      <p class="lead"><%-: tweet.text | tweetify %></p>
+      <div>
+        <span><%=: tweet.created_at | timeAgo %></span>
+        <a class="btn btn-link" href="http://twitter.com/intent/retweet?tweet_id=<%- tweet.id_str %>">Retweet</a>
+        <a class="btn btn-link" href="http://twitter.com/intent/tweet?in_reply_to=<%- tweet.id_str %>">Reply</a>
+        <a class="btn btn-link" href="http://twitter.com/intent/favorite?tweet_id=<%- tweet.id_str %>">Favorite</a>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</section>

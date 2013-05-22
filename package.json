@@ -1,0 +1,36 @@
+{
+  "name": "www.qur2.eu",
+  "version": "0.1.0",
+  "description": "My official personal website :).",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jaredhanson/www.qur2.eu.git"
+  },
+  "bugs": {
+    "url": "http://github.com/qur2/www.qur2.eu/issues"
+  },
+  "author": {
+    "name": "Aurélien Scoubeau",
+    "email": "aurelien.scoubeau@gmail.com",
+    "url": "http://www.aurelienscoubeau.eu/"
+  },
+  "licenses": [ {
+    "type": "CC BY-SA 3.0",
+    "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+  } ],
+  "dependencies": {
+    "kerouac": "0.0.x",
+    "kerouac-sitemap": "0.1.x",
+    "kerouac-robotstxt": "0.1.x",
+    "kerouac-htaccess": "0.1.x",
+    "ejs-locals": "1.x.x",
+    "express": "3.x.x",
+    "underscore": "1.4.x",
+    "async": "0.2.x",
+    "passport": "0.1.x",
+    "passport-oauth": "0.1.x",
+    "passport-linkedin": "0.1.x",
+    "passport-500px": "0.1.x"
+  }
+}
