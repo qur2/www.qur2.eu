@@ -7,7 +7,7 @@ if ('pump' === verb) {
 	var server = require('./grab/app')({
 		person: 'aurelienscoubeau',
 		profiles: JSON.parse(config),
-		store: __dirname + '/content/'
+		store: __dirname + '/jsondata/'
 	});
 } else {
 	var express = require('express');

@@ -24,6 +24,8 @@
     "kerouac-sitemap": "0.1.x",
     "kerouac-robotstxt": "0.1.x",
     "kerouac-htaccess": "0.1.x",
+    "kerouac-jsondataview": "git+https://github.com/qur2/kerouac-jsondataview.git",
+    "ejs": "0.8.x",
     "ejs-locals": "1.x.x",
     "express": "3.x.x",
     "underscore": "1.4.x",
