@@ -33,6 +33,7 @@ site.content('content');
 site.plug(require('kerouac-jsondataview')('jsondata'));
 site.plug(require('kerouac-sitemap')());
 site.plug(require('kerouac-robotstxt')());
+site.plug(require('kerouac-cname')('www.qur2.eu'));
 
 
 site.generate(function(err) {
