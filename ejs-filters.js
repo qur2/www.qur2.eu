@@ -7,16 +7,8 @@ var timeAgo = function(time_value) {
   delta = delta + (relative_to.getTimezoneOffset() * 60);
 
   var r = '';
-  if (delta < 60) {
-    r = 'a minute ago';
-  } else if(delta < 120) {
-    r = 'couple of minutes ago';
-  } else if(delta < (45*60)) {
-    r = (parseInt(delta / 60)).toString() + ' minutes ago';
-  } else if(delta < (90*60)) {
-    r = 'an hour ago';
-  } else if(delta < (24*60*60)) {
-    r = '' + (parseInt(delta / 3600)).toString() + ' hours ago';
+  if (delta < (24*60*60)) {
+    r = 'In the last 24h';
   } else if(delta < (48*60*60)) {
     r = '1 day ago';
   } else {
@@ -28,7 +20,7 @@ var timeAgo = function(time_value) {
 var tweetify = function(t) {
   return t.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi,
     '<a href="$1">$1</a>')
-  .replace(/(^|\s)#(\w+)/g,'$1<a href="http://search.twitter.com/search?q=%23$2">#$2</a>')
+  .replace(/(^|\s)#(\w+)/g,'$1<a href="http://twitter.com/search?q=%23$2">#$2</a>')
   .replace(/(^|\s)@(\w+)/g,'$1<a href="http://twitter.com/$2">@$2</a>');
 };
 
