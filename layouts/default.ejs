@@ -3,7 +3,9 @@
 <div class="menu">
 	<div class="container">
 		<nav class="clearfix">
-			<h1 class="pull-right"><%= person %></h1>
+			<h1 class="pull-right">
+				<a href="https://plus.google.com/109883582351529784361?rel=author"><%= person %></a>
+			</h1>
 			<ul class="nav nav-tabs">
 			<% profiles.forEach(function(p) { -%>
 			<li class="<%= p === active_profile ? 'active' : '' %>">
