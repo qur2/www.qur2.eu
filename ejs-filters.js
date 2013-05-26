@@ -29,9 +29,14 @@ var monthAndYear = function(dt) {
   var d = new Date(dt);
   return [months[d.getMonth()], d.getFullYear()].join(' ');
 };
+var dayMonthAndYear = function(dt) {
+  var d = new Date(dt);
+  return [d.getDate(), months[d.getMonth()], d.getFullYear()].join(' ');
+};
 
 exports = module.exports = {
   tweetify: tweetify,
   timeAgo: timeAgo,
-  monthAndYear: monthAndYear
+  monthAndYear: monthAndYear,
+  dayMonthAndYear: dayMonthAndYear
 };

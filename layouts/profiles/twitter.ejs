@@ -4,7 +4,7 @@
     <div class="tweet">
       <p class="lead"><%-: tweet.text | tweetify %></p>
       <div>
-        <span><%=: tweet.created_at | timeAgo %></span>
+        <span data-created-at="<%- tweet.created_at %>"><%=: tweet.created_at | dayMonthAndYear %></span>
         <a class="btn btn-link" href="http://twitter.com/intent/retweet?tweet_id=<%- tweet.id_str %>">Retweet</a>
         <a class="btn btn-link" href="http://twitter.com/intent/tweet?in_reply_to=<%- tweet.id_str %>">Reply</a>
         <a class="btn btn-link" href="http://twitter.com/intent/favorite?tweet_id=<%- tweet.id_str %>">Favorite</a>
@@ -13,3 +13,14 @@
     <% }); %>
   </div>
 </section>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  (function($) {
+    var timeAgo = <%- filters.timeAgo.toString() %>
+    $('[data-created-at]').each(function () {
+      $(this).text(timeAgo($(this).data('created-at')));
+    });
+  })($);
+});
+</script>
