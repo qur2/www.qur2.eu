@@ -24,6 +24,17 @@ site.locals.person = 'aurelienscoubeau';
 site.locals.profiles = profiles;
 site.locals.active_profile = false;
 
+// use 500px image urls to provide backgrounds
+site.locals.background = (function (file) {
+  var bgs = [];
+  var content = fs.readFileSync(file);
+  var json = JSON.parse(content);
+  json.pics.photos.forEach(function (pic, i) {
+    bgs.push(pic.image_url.split('/').slice(0, -1).join('/') + '/5.jpg');
+  });
+  return bgs[Math.floor(Math.random() * bgs.length)];
+})('jsondata/500px.json');
+
 site.engine('ejs', require('ejs-locals'));
 
 site.content('content');
