@@ -9,6 +9,8 @@ var _ = require('underscore');
 var util = require('util');
 
 
+var userAgent = 'Junction site generator';
+
 var authSchemes = [
 	'oauth',
 	'oauth2-bearer'
@@ -33,33 +35,14 @@ function ensureJSON(payload) {
 
 // Wrap a http(s) request in a function ready to be fired with a callback.
 // @see http://nodejs.org/api/url.html
-function getNoAuthResource(resUrl) {
-	var client = 'https:' === resUrl.substring(0, 6) ? https : http;
-	return function(asyncCallback) {
-		var reqOpts = url.parse(resUrl);
-		reqOpts.headers = {'user-agent': 'nodejs@qur2.eu'};
-		client.request(reqOpts, function(res) {
-			var incoming = '';
-			res.on('data', function(d) {
-				incoming += d;
-			});
-			res.on('end', function() {
-				try {
-					var json = ensureJSON(incoming);
-					if (400 <= res.statusCode) {
-						return asyncCallback(json.message);
-					}
-					asyncCallback(null, json);
-				} catch (e) {
-					asyncCallback(e);
-				}
-			});
-			res.on('error', function(e) {
-				asyncCallback(e);
-			});
-		}).on('error', function(e) {
-			asyncCallback(e);
-		}).end();
+function getPublicResource(resUrl, headers) {
+	if (!headers) headers = {};
+	headers['user-agent'] = userAgent;
+	return function(callback) {
+		request.get({ url: resUrl, headers: headers, json: true }, function (error, response, incoming) {
+			if (error) return callback(error);
+			return callback(null, incoming);
+		});
 	};
 }
 
@@ -70,15 +53,6 @@ function getOAuthResource(oauth, res_url, token, tokenSecret) {
 			return asyncCallback(null, JSON.parse(data));
 		});
 	};
-}
-
-function getOAuth2BearerResource(resUrl, headers) {
-	return function(callback) {
-		request.get({ url: resUrl, headers: headers, json: true }, function (error, response, incoming) {
-			if (error) return callback(error);
-			return callback(null, incoming);
-		});
-	}
 }
 
 function middlewareAuth(req, res, next) {
@@ -102,7 +76,7 @@ function noAuthFeed(req, res, next) {
 	var simulatePost = fakePostRequest(req, next);
 	var reqs = {};
 	_.each(feed, function(url, name) {
-		reqs[name] = getNoAuthResource(url);
+		reqs[name] = getPublicResource(url);
 	});
 	async.parallel(reqs, simulatePost);
 	return reqs;
@@ -145,7 +119,7 @@ function oauth2BearerFeed(req, res, next) {
 	var postHead = {};
 	request.defaults({jar: false});
 	postHead['Connection'] = 'close';
-	postHead['User-Agent'] = 'Junction site generator';
+	postHead['User-Agent'] = userAgent;
 	postHead['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 	postHead['Authorization'] = 'Basic ' + toBase64(profile.consumerKey + ':' + profile.consumerSecret);
 	request.post({
@@ -162,7 +136,7 @@ function oauth2BearerFeed(req, res, next) {
 		getHead['Authorization'] = 'Bearer ' + json.access_token;
 		var reqs = {};
 		_.each(profile.feed, function(feedUrl, feedName) {
-			reqs[feedName] = getOAuth2BearerResource(feedUrl, getHead);
+			reqs[feedName] = getPublicResource(feedUrl, getHead);
 		});
 		var simulatePost = fakePostRequest(req, next);
 		async.parallel(reqs, simulatePost);
@@ -177,3 +151,4 @@ function toBase64(data, encoding) {
 exports.request = middleware;
 exports.access = middlewareAuth;
 exports.authSchemes = authSchemes;
+exports.userAgent = userAgent;
