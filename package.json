@@ -34,6 +34,7 @@
     "passport": "0.1.x",
     "passport-oauth": "0.1.x",
     "passport-linkedin": "0.1.x",
-    "passport-500px": "0.1.x"
+    "passport-500px": "0.1.x",
+    "request": "~2.21.0"
   }
 }
