@@ -25,9 +25,20 @@
     <script>
     $(document).ready(function () {
       $.getScript('//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js').done(function() {
+        $(window).one('backstretch.show', function () {
+          $(document).keyup(function(evt) {
+            if (evt.keyCode !== 27) return true;
+            $('body').toggleClass('wipe');
+          });
+          $('.alert.esckey').fadeIn();
+        });
         $.backstretch('<%- background %>');
       });
     });
     </script>
+
+    <div class="alert alert-info esckey" style="display: none;">
+      <p class="muted"><small>Press the ESC key to get a better view on the background.</small><p>
+    </div>
   </body>
 </html>
