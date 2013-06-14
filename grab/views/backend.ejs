@@ -24,12 +24,12 @@
 			<h2><%= p.type %></h2>
 			<input type="hidden" value="/<%= p.type %>" name="url" />
 
-			<textarea name="feed"
-				rows="6"><%= JSON.stringify(p.feed, null, '\t') %></textarea>
+			<!--textarea name="feed"
+				rows="6"><%= JSON.stringify(p.feed, null, '\t') %></textarea-->
 			<a name="refresh"
 				rel="<%= p.auth %>" href="/<%= p.type %>"
 				class="btn btn-primary">Grab data</a>
-			<button type="submit" name="save" class="btn">Update identity</button>
+			<!--button type="submit" name="save" class="btn">Update identity</button-->
 		</div>
 		<% }) %>
 	</div>
@@ -37,34 +37,34 @@
 
 <script type="text/javascript">
 function start() {
-	$('#identities').on('click', 'button[name=save]', function (e) {
-		e.preventDefault();
-		var btn = $(e.currentTarget);
-		var url = $(this).siblings('input[name=url]').val();
-		var payload = $(this).siblings('[name=feed]').val();
-		try {
-			var json = $.parseJSON(payload);
-			if (!json || $.isEmptyObject(json))
-				throw 'empty...';
-			btn.addClass('btn-inverse');
-			$.ajax({
-				url: url,
-				type: 'put',
-				data: {feed: json},
-				success: function() {
-					btn.removeClass('btn-inverse').addClass('btn-success');
-				},
-				error: function() {
-					btn.removeClass('btn-inverse').addClass('btn-danger');
-				}
-			});
-		}
-		catch (e) {
-			btn.addClass('btn-danger');
-			if (console)
-				console.log(e.message);
-		}
-	});
+	// $('#identities').on('click', 'button[name=save]', function (e) {
+	// 	e.preventDefault();
+	// 	var btn = $(e.currentTarget);
+	// 	var url = $(this).siblings('input[name=url]').val();
+	// 	var payload = $(this).siblings('[name=feed]').val();
+	// 	try {
+	// 		var json = $.parseJSON(payload);
+	// 		if (!json || $.isEmptyObject(json))
+	// 			throw 'empty...';
+	// 		btn.addClass('btn-inverse');
+	// 		$.ajax({
+	// 			url: url,
+	// 			type: 'put',
+	// 			data: {feed: json},
+	// 			success: function() {
+	// 				btn.removeClass('btn-inverse').addClass('btn-success');
+	// 			},
+	// 			error: function() {
+	// 				btn.removeClass('btn-inverse').addClass('btn-danger');
+	// 			}
+	// 		});
+	// 	}
+	// 	catch (e) {
+	// 		btn.addClass('btn-danger');
+	// 		if (console)
+	// 			console.log(e.message);
+	// 	}
+	// });
 
 	$('#identities').on('click', '[name=refresh][rel!=oauth]', function (e) {
 		e.preventDefault();
