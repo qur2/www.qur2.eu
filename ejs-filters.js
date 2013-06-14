@@ -34,9 +34,58 @@ var dayMonthAndYear = function(dt) {
   return [d.getDate(), months[d.getMonth()], d.getFullYear()].join(' ');
 };
 
+var columns = function(list, n) {
+  var columns = [];
+  for (var m=0; m<n; m++) {
+    columns.push([]);
+  }
+  for (var i=0, max=list.length; i<max; i++) {
+    columns[i%n].push(list[i]);
+  }
+  return columns;
+};
+
+// var faircut = function(schedulee, n, scoreFn) {
+//   if (!scoreFn) {
+//     scoreFn = function(el) { return 1; };
+//   }
+//   var total = schedulee.reduce(function (acc, el, i) {
+//     return acc + scoreFn(el);
+//   }, 0);
+//   var avg = Math.round(total / n);
+//   var lists = [];
+//   for (var m=0; m<n; m++) {
+//     var list = [];
+//     list.quota = avg;
+//     lists.push(list);
+//   }
+//   var next = 0;
+//   schedulee.forEach(function (el, i, j, l, score) {
+//     score = scoreFn(el);
+//     // starting from the expected list, try to find one with enough space
+//     for (l=0; l<n; l++) {
+//       j = (l + next) % n;
+//       if (lists[j].quota >= score) {
+//         lists[j].quota -= score;
+//         next = j + 1;
+//         return lists[j].push(el);
+//       }
+//     }
+//     // if no list had enough space, insert in the expected one
+//     j = next % n;
+//     lists[j].push(el);
+//     lists[j].quota -= score;
+//     next = j + 1;
+//   });
+//   return lists;
+// };
+
+
 exports = module.exports = {
   tweetify: tweetify,
   timeAgo: timeAgo,
+  columns: columns,
+  // faircut: faircut,
   monthAndYear: monthAndYear,
   dayMonthAndYear: dayMonthAndYear
 };
