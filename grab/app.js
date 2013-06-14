@@ -53,13 +53,28 @@ var exports = module.exports = function (options) {
 	});
 
 	app.get('/:profile', [setActiveProfile, grab.request], function(req, res) {
+		filterPostData(req);
 		post2file(req);
 		res.send(200);
 	});
 	app.get('/:profile/callback', [setActiveProfile, grab.access], function(req, res) {
+		filterPostData(req);
 		post2file(req);
 		res.redirect('/');
 	});
+
+	function filterPostData(req) {
+		if (req.profile.filter) {
+			_.each(req.body, function(els, name) {
+				var count = req.body[name].length;
+				if (!req.profile.filter[name]) return;
+				var f = new Function('el', req.profile.filter[name]);
+				req.body[name] = req.body[name].filter(f);
+				count -= req.body[name].length;
+				util.log(util.format('filtered %s items in %s', count, name));
+			});
+		}
+	}
 
 	function post2file(req) {
 		if (!req.body) {
@@ -88,6 +103,9 @@ var exports = module.exports = function (options) {
 		}
 		next();
 	}
+
+	app.post2file = post2file;
+	app.filterPostData = filterPostData;
 
 	return app;
 };
