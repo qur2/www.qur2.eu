@@ -20,8 +20,9 @@ var timeAgo = function(time_value) {
 var tweetify = function(t) {
   return t.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi,
     '<a href="$1">$1</a>')
-  .replace(/(^|\s)#(\w+)/g,'$1<a href="http://twitter.com/search?q=%23$2">#$2</a>')
-  .replace(/(^|\s)@(\w+)/g,'$1<a href="http://twitter.com/$2">@$2</a>');
+    .replace(/(^|\s)#(\w+)/g,'$1<a href="http://twitter.com/search?q=%23$2">#$2</a>')
+    .replace(/(^|\s)@(\w+)/g,'$1<a href="http://twitter.com/$2">@$2</a>')
+    .replace(/\n/g,'<br />');
 };
 
 var months = 'Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
