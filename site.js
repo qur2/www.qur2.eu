@@ -33,13 +33,12 @@ site.locals.background = (function (file) {
     bgs.push(pic.image_url.split('/').slice(0, -1).join('/') + '/5.jpg');
   });
   return bgs[Math.floor(Math.random() * bgs.length)];
-})('jsondata/500px.json');
+})('jsondata/fivehpx.json');
 
 site.engine('ejs', require('ejs-locals'));
 
 site.content('content');
 site.static('public');
-site.content('content');
 
 site.plug(require('kerouac-jsondataview')('jsondata'));
 site.plug(require('kerouac-sitemap')());

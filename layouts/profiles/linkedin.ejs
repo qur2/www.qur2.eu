@@ -4,18 +4,18 @@
 <section class="linkedin">
 	<div class="media hero-unit">
 		<a class="pull-left" href="#">
-			<img class="img-polaroid" src="<%= data.cv.pictureUrl %>">
+			<img class="img-polaroid" src="<%= linkedin.cv.pictureUrl %>">
 		</a>
 		<div class="pull-left">
-			<h2><%- data.cv.firstName %> <%- data.cv.lastName %></h2>
-			<p><%- data.cv.headline %></p>
+			<h2><%- linkedin.cv.firstName %> <%- linkedin.cv.lastName %></h2>
+			<p><%- linkedin.cv.headline %></p>
 		</div>
 	</div>
 
 	<div class="cv row">
 		<div class="skills span2 pull-right">
 			<h3 class="label">Skills</h3>
-			<% data.cv.skills.values.forEach(function(skill, i) { %>
+			<% linkedin.cv.skills.values.forEach(function(skill, i) { %>
 			<span class="label"><%- skill.skill.name %></span>
 			<% }); %>
 			<span class="label label-success">and counting...</span>
@@ -26,7 +26,7 @@
 			<h3 class="label">Experience</h3>
 		</header>
 		<div class="span8">
-			<% data.cv.positions.values.forEach(function(pos, i) { %>
+			<% linkedin.cv.positions.values.forEach(function(pos, i) { %>
 			<article class="positions n<%= i %>">
 				<p class="lead">
 					<b><%= pos.title %></b> at <b><%= pos.company.name %></b>
@@ -50,7 +50,7 @@
 			<h3 class="label">Education</h3>
 		</header>
 		<div class="span8">
-		<% data.cv.educations.values.forEach(function(educ, i) { %>
+		<% linkedin.cv.educations.values.forEach(function(educ, i) { %>
 		<article class="education n<%= i %>">
 			<p class="lead">
 				<b><%= educ.degree %></b> in <b><%= educ.fieldOfStudy %></b>

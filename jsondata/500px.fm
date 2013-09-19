@@ -1,5 +1,5 @@
 ---
 view: profiles/500px.ejs
-data: jsondata/500px.json
+data: jsondata/fivehpx.json
 active_profile: 500px
 ---

@@ -1,8 +1,8 @@
 <section class="delicious">
 	<div class="favs row">
-		<% var itemPerCol = Math.ceil(data.favs.length/2); %>
+		<% var itemPerCol = Math.ceil(delicious.favs.length/2); %>
 		<div class="span6">
-			<% data.favs.forEach(function(fav, i) { %>
+			<% delicious.favs.forEach(function(fav, i) { %>
 			<div class="fav">
 				<p class="lead">
 					<a href="<%= fav.u %>"><%- fav.d %></a>

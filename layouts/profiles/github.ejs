@@ -2,7 +2,7 @@
 	<h3>Repos</h3>
 	<div class="repos row">
 		<div class="span4">
-		<% filters.columns(data.repos, 3).forEach(function (repos, col) { %>
+		<% filters.columns(github.repos, 3).forEach(function (repos, col) { %>
 			<% repos.forEach(function (repo, i) { %>
 			<div class="thumbnail">
 				<div class="caption">
@@ -29,9 +29,9 @@
 
 	<h3>Gists</h3>
 	<div class="gists row">
-		<% var itemPerCol = Math.ceil(data.gists.length/3); %>
+		<% var itemPerCol = Math.ceil(github.gists.length/3); %>
 		<div class="span4">
-		<% filters.columns(data.gists, 3).forEach(function (gists, col) { %>
+		<% filters.columns(github.gists, 3).forEach(function (gists, col) { %>
 			<% gists.forEach(function (gist, i) { %>
 			<div class="thumbnail">
 			<div class="caption">
