@@ -1,5 +1,0 @@
----
-view: profiles/twitter.ejs
-data: jsondata/twitter.json
-active_profile: twitter
----
