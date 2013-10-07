@@ -49,7 +49,7 @@ function getPublicResource(resUrl, headers) {
 function getOAuthResource(oauth, res_url, token, tokenSecret) {
 	return function(asyncCallback) {
 		oauth.getProtectedResource(res_url, 'GET', token, tokenSecret,  function (error, data, response) {
-			if (error) return asyncCallback(err);
+			if (error) return asyncCallback(error);
 			return asyncCallback(null, JSON.parse(data));
 		});
 	};
