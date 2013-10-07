@@ -8,11 +8,11 @@ var timeAgo = function(time_value) {
 
   var r = '';
   if (delta < (24*60*60)) {
-    r = 'In the last 24h';
+    r = '< 24h';
   } else if(delta < (48*60*60)) {
-    r = '1 day ago';
+    r = '1 day';
   } else {
-    r = (parseInt(delta / 86400)).toString() + ' days ago';
+    r = (parseInt(delta / 86400)).toString() + ' days';
   }
   return r;
 };
@@ -22,17 +22,25 @@ var tweetify = function(t) {
     '<a href="$1">$1</a>')
     .replace(/(^|\s)#(\w+)/g,'$1<a href="http://twitter.com/search?q=%23$2">#$2</a>')
     .replace(/(^|\s)@(\w+)/g,'$1<a href="http://twitter.com/$2">@$2</a>')
-    .replace(/\n/g,'<br />');
+    /*.replace(/\n/g,'<br />')*/;
+};
+
+var lb = function (txt) {
+  return (txt || '').split('\n').join('<br>');
 };
 
 var months = 'Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
 var monthAndYear = function(dt) {
   var d = new Date(dt);
-  return [months[d.getMonth()], d.getFullYear()].join(' ');
+  return [d.getMonth()+1, d.getFullYear()].join('/');
+};
+var dayAndMonth = function(dt) {
+  var d = new Date(dt);
+  return [d.getDate(), d.getMonth()+1].join('/');
 };
 var dayMonthAndYear = function(dt) {
   var d = new Date(dt);
-  return [d.getDate(), months[d.getMonth()], d.getFullYear()].join(' ');
+  return [d.getDate(), months[d.getMonth()], d.getFullYear()].join('&nbsp;');
 };
 
 var columns = function(list, n) {
@@ -44,6 +52,13 @@ var columns = function(list, n) {
     columns[i%n].push(list[i]);
   }
   return columns;
+};
+
+var size = function(obj) {
+  if (typeof obj.length === 'number') {
+    return obj.length;
+  }
+  return Object.keys(obj).length;
 };
 
 // var faircut = function(schedulee, n, scoreFn) {
@@ -86,6 +101,9 @@ exports = module.exports = {
   tweetify: tweetify,
   timeAgo: timeAgo,
   columns: columns,
+  lb: lb,
+  size: size,
+  length: size,
   // faircut: faircut,
   monthAndYear: monthAndYear,
   dayMonthAndYear: dayMonthAndYear

@@ -1,0 +1,182 @@
+<div class="row">
+	<div class="col-md-6 col-sm-12">
+		<div class="block twitter">
+			<div class="stats clearfix">
+				<div>
+					<a href="https://twitter.com/<%= twitter.tweets[0].user.screen_name %>"
+						class="icon-social icon-social-twitter"
+						style="color: #00acee">
+						<small>
+							@<%= twitter.tweets[0].user.screen_name %>
+						</small>
+					</a>
+				</div>
+				<div>
+					<b>731</b>
+					<small>Tweets</small>
+				</div>
+				<div>
+					<b>36</b>
+					<small>Followers</small>
+				</div>
+				<div>
+					<b>60</b>
+					<small>Following</small>
+				</div>
+			</div>
+
+			<div class="summary">
+			<% twitter.tweets.slice(0, 4).forEach(function (tweet, i) { %>
+				<div>
+					<div class="label label-default timeago" class="text-muted">
+						<small data-created-at="<%- tweet.created_at %>"><%=: tweet.created_at | timeAgo %></small>
+						<small>ago</small>
+					</div>
+					<p>
+						<%-: tweet.text | tweetify %>
+					</p>
+					<!--a href="http://twitter.com/intent/retweet?tweet_id=<%- tweet.id_str %>">Retweet</a>
+					<a href="http://twitter.com/intent/tweet?in_reply_to=<%- tweet.id_str %>">Reply</a>
+					<a href="http://twitter.com/intent/favorite?tweet_id=<%- tweet.id_str %>">Favorite</a-->
+				</div>
+				<% }); %>
+			</div>
+		</div>
+		<div class="block github">
+			<div class="stats clearfix">
+				<div>
+					<a href="<%= github.repos[0].owner.html_url %>"
+						class="icon-social icon-social-github"
+						style="color: #171515">
+						<small>
+							<%= github.repos[0].owner.login %>
+						</small>
+					</a>
+				</div>
+				<div>
+					<b><%= github.repos.length %></b>
+					<small>Repos</small>
+				</div>
+				<div>
+					<b><%= github.gists.length %></b>
+					<small>Gists</small>
+				</div>
+				<div>
+					<b>28</b>
+					<small>Starred</small>
+				</div>
+			</div>
+
+			<div class="summary">
+			<% github.repos.slice(0, 4).forEach(function (repo, i) { %>
+				<div>
+					<h3>
+						<a href="<%= repo.html_url %>"><%- repo.name %></a>
+					</h3>
+					<p>
+						<%- repo.description %>
+						<span class="label label-default">
+							<%- repo.language %>
+						</span>
+						<% if (repo.fork) { %>
+						<span class="label label-default">fork</span>
+						<% } %>
+					</p>
+				</div>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-12">
+		<div class="block fivehpx">
+			<div class="stats clearfix">
+				<div>
+					<a href="http://500px.com/<%= fivehpx.pics.photos[0].user.username %>"
+						class="icon-social icon-social-500px"
+						style="color: #02adea">
+						<small>
+							<%= fivehpx.pics.photos[0].user.username %>
+						</small>
+					</a>
+				</div>
+				<div>
+					<b><%= fivehpx.pics.photos[0].user.affection %></b>
+					<small>Affection</small>
+				</div>
+				<div>
+					<b><%= fivehpx.pics.total_items %></b>
+					<small>Pics</small>
+				</div>
+				<div>
+					<b><%= fivehpx.pics.photos[0].user.followers_count %></b>
+					<small>Followers</small>
+				</div>
+			</div>
+
+			<div class="summary">
+			<% fivehpx.pics.photos.slice(0, 2).forEach(function (photo, i) { %>
+				<div class="media">
+					<a class="pull-left" href="<%= photo.image_url %>">
+						<img class="media-object" src="<%= photo.image_url %>" />
+					</a>
+					<div class="media-body">
+						<h3>
+							<a href="http://500px.com/photo/<%= photo.id %>"><%= photo.name %></a>
+						</h3>
+						<p><%- photo.description %></p>
+					</div>
+				</div>
+				<% }); %>
+			</div>
+		</div>
+		<div class="block delicious">
+			<div class="stats clearfix">
+				<div>
+					<a href="http://delicious.com/<%= delicious.favs[0].a %>"
+						class="icon-social icon-grid-big"
+						style="color: #205cc0">
+						<small>
+							<%= delicious.favs[0].a %>
+						</small>
+					</a>
+				</div>
+				<div>
+					<b><%= delicious.user[0].n %></b>
+					<small>Favs</small>
+				</div>
+				<div>
+					<b><%-: delicious.tags | length %></b>
+					<small>Tags</small>
+				</div>
+				<div>
+					<b></b>
+					<small></small>
+				</div>
+			</div>
+
+			<div class="summary">
+			<% delicious.favs.slice(0, 5).forEach(function (fav, i) { %>
+				<p>
+					<a href="<%= fav.u %>"><%- fav.d %></a>
+					<% fav.t.forEach(function(tag, i) { %>
+					<span class="label label-default">
+						<%- tag %>
+					</span>
+					<% }); %>
+				</p>
+			<% }); %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  (function($) {
+	var timeAgo = <%- filters.timeAgo.toString() %>
+	$('[data-created-at]').each(function () {
+		$(this).text(timeAgo($(this).data('created-at')));
+	});
+  })($);
+});
+</script>

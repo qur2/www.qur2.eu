@@ -1,0 +1,4 @@
+---
+view: cv.ejs
+data: jsondata/linkedin.json
+---

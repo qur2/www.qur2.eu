@@ -1,0 +1,51 @@
+<% layout('boilerplate') -%>
+
+<div id="wrap">
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<ul class="nav navbar-nav">
+				<li class="">
+					<a href="/">
+						<span class="glyphicon glyphicon-dashboard"></span>
+						<span class="title">Home</span>
+					</a>
+				</li>
+				<li class="">
+					<a href="/cv">
+						<span class="glyphicon glyphicon-file"></span>
+						<span class="title">CV</span>
+					</a>
+				</li>
+				<li class="">
+					<a href="/about">
+						<span class="glyphicon glyphicon-info-sign"></span>
+						<span class="title">About</span>
+					</a>
+				</li>
+				<li class="pull-right">
+					<a href="#" rel="wipe"
+						title="Press &lt;esc&gt; to reveal anytime">
+						<span class="glyphicon glyphicon-camera"></span>
+						<span class="title">Reveal picture</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="container">
+	<%- body -%>
+	</div>
+</div>
+<div id="footer">
+	<div class="container">
+		<div class="clearfix">
+			<p class="muted pull-left">
+				<a href="https://plus.google.com/109883582351529784361?rel=author"><%= person %></a>
+			</p>
+			<p class="muted pull-right .hidden-sm .hidden-xs">
+				<small>Press the ESC key to get a better view on the background.</small>
+			<p>
+		</div>
+	</div>
+</div>

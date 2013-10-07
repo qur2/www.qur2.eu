@@ -37,8 +37,8 @@ site.locals.background = (function (file) {
 
 site.engine('ejs', require('ejs-locals'));
 
-site.content('content');
 site.static('public');
+site.content('content');
 
 site.plug(require('kerouac-jsondataview')('jsondata'));
 site.plug(require('kerouac-sitemap')());

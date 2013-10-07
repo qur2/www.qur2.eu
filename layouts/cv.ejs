@@ -1,0 +1,103 @@
+<div class="row linkedin">
+	<div class="col-sm-12 col-md-12">
+		<div class="block jumbotron">
+			<p>
+				<%- linkedin.cv.firstName %> <%- linkedin.cv.lastName %>
+			</p>
+			<h1><%- linkedin.cv.positions.values[0].title %></h1>
+			<blockquote>
+				<p><%- linkedin.cv.summary %></p>
+			</blockquote>
+		</div>
+	</div>
+</div>
+
+<div class="row linkedin">
+	<div class="col-sm-12 col-md-6">
+		<div class="block panel">
+			<div class="panel-heading">
+				<h3>Experience</h3>
+			</div>
+			<div class="panel-body">
+			<% linkedin.cv.positions.values.forEach(function(pos, i) { %>
+				<div class="position n<%= i %>">
+					<h4><%= pos.title %> at <%= pos.company.name %>
+						<small class="muted">
+						from <%= pos.startDate.year %>/<%= pos.startDate.month %> to
+						<% if (pos.isCurrent) { %>
+						present
+						<% } else { %>
+						<%= pos.endDate.year %>/<%= pos.endDate.month %>
+						<% } %>
+						</small>
+					</h4>
+					<p><%-: pos.summary | lb%></p>
+				</div>
+			<% }); %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-md-6">
+		<div class="block panel">
+			<div class="panel-heading">
+				<h3>Education</h3>
+			</div>
+
+			<div class="panel-body">
+			<% linkedin.cv.educations.values.forEach(function(educ, i) { %>
+				<div class="education n<%= i %>">
+					<h4><%= educ.degree %> <%= educ.fieldOfStudy %>
+						<small>
+						<%= educ.schoolName %>
+						<% if (educ.endDate.year == educ.startDate.year) { %>
+						since <%= educ.startDate.year %>
+						<% } else { %>
+						from <%= educ.startDate.year %>
+						to <%= educ.endDate.year %>
+						<% } %>
+						</small>
+					</h4>
+					<p><%-: educ.notes | lb %></p>
+				</div>
+			<% }); %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-md-6 pull-right">
+		<div class="block panel">
+			<div class="panel-heading">
+				<h3>Recommendations</h3>
+			</div>
+
+			<div class="panel-body">
+			<% linkedin.cv.recommendationsReceived.values.forEach(function(rec, i) { %>
+				<div class="education n<%= i %>">
+					<h4>
+						<%= rec.recommender.firstName.slice(0, 1) %>. <%= rec.recommender.lastName %>
+						<small>as a <%= rec.recommendationType.code.replace('-', ' ') %></small>
+					</h4>
+					<p><%-: rec.recommendationText | lb %></p>
+				</div>
+			<% }); %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-md-6 clearfix">
+		<div class="block panel skills">
+			<div class="panel-heading">
+				<h3>Skills</h3>
+			</div>
+
+			<div class="panel-body">
+				<p class="lead">
+				<% linkedin.cv.skills.values.forEach(function(skill, i) { %>
+					<span><%- skill.skill.name %></span>
+				<% }); %>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

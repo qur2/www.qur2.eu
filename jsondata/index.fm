@@ -1,0 +1,4 @@
+---
+view: social-cards.ejs
+data: jsondata/fivehpx.json,jsondata/delicious.json,jsondata/github.json,jsondata/twitter.json
+---
