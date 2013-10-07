@@ -1,0 +1,145 @@
+@import url(http://fonts.googleapis.com/css?family=Tauri);
+
+@import url(http://fonts.googleapis.com/css?family=Strait);
+body {
+  background-color: #c3c3c3;
+}
+body.wipe .view {
+  display: none;
+}
+body.wipe .nav-tabs > li > a {
+  border-radius: 4px;
+}
+.menu {
+  padding-top: 20px;
+}
+.menu h1 {
+  margin: 20px 0 0 0;
+}
+.menu .nav {
+  margin-bottom: 0;
+  border: none;
+}
+.menu .nav > li > a:hover,
+.menu .nav > li > a:focus {
+  background-color: #ffffff;
+}
+.menu .nav-tabs > li.active > a,
+.menu .nav-tabs > li > a:hover,
+.menu .nav-tabs > li > a:focus {
+  border-color: #fff;
+}
+.alert.esckey {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 0;
+  padding: 3px 8px;
+  color: #8787ad;
+  border-radius: 4px 0 0 0;
+  background-color: rgba(237, 237, 247, 0.7);
+  border-color: #e8e8f1;
+}
+.alert.esckey p {
+  margin-bottom: 0;
+}
+.view {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px -5px 55px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -5px 55px 25px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+}
+h1 {
+  background-color: #3c3c3c;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.5) 0px 1px 1px;
+  font-family: 'Tauri', sans-serif;
+}
+h1 a,
+h1 a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.github h3 {
+  font-family: 'Strait', sans-serif;
+}
+.github .thumbnail {
+  margin-bottom: 20px;
+}
+.github .caption h3 {
+  margin-top: 0;
+  line-height: 24.5px;
+  font-size: 22.5px;
+}
+.github .caption p {
+  margin: 0;
+}
+.github .caption .label {
+  font-family: 'Strait', sans-serif;
+}
+.github .caption .desc {
+  font-family: sans-serif;
+  letter-spacing: .1em;
+  margin: 0 0 10px;
+}
+.fivehundredpx .tile {
+  display: block;
+  float: left;
+  margin: 0;
+  width: 134.28px;
+  height: 134.28px;
+}
+.twitter .lead,
+.delicious .lead {
+  margin: 0px 0;
+}
+.twitter .tweet,
+.delicious .tweet,
+.twitter .fav,
+.delicious .fav {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.linkedin .hero-unit {
+  padding: 30px;
+  margin-bottom: 2px;
+}
+.linkedin .hero-unit h2 {
+  margin-top: 4px;
+}
+.linkedin .lead {
+  margin: 20px 0 0px;
+}
+.linkedin .lead b {
+  font-weight: 400;
+}
+.linkedin .lead small {
+  display: block;
+}
+.linkedin .span2 {
+  clear: left;
+  text-align: right;
+}
+.linkedin .span2 h3,
+.linkedin .span2 .label {
+  font-family: 'Strait', sans-serif;
+}
+.linkedin .span2 h3 {
+  font-size: 150%;
+  margin-top: 18px;
+  padding: 10px;
+  background-color: #ccc;
+  display: block;
+  text-align: center;
+}
+.linkedin .skills {
+  line-height: 40px;
+}

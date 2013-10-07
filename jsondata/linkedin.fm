@@ -1,0 +1,5 @@
+---
+view: profiles/linkedin.ejs
+data: jsondata/linkedin.json
+active_profile: linkedin
+---

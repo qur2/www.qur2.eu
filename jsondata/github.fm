@@ -1,0 +1,5 @@
+---
+view: profiles/github.ejs
+data: jsondata/github.json
+active_profile: github
+---

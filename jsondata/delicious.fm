@@ -1,0 +1,5 @@
+---
+view: profiles/delicious.ejs
+data: jsondata/delicious.json
+active_profile: delicious
+---

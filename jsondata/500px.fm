@@ -1,0 +1,5 @@
+---
+view: profiles/500px.ejs
+data: jsondata/500px.json
+active_profile: 500px
+---
