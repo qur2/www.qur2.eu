@@ -203,9 +203,26 @@ body.wipe .block, body.wipe #footer {
 #footer {
     height: 40px;
 }
-#footer p {
+#footer p, #footer ul {
     margin: 10px 10px;
 }
+#footer li {
+  display: block;
+}
+@media (min-width: 768px) {
+  #footer li {
+    display: inline;
+  }
+  #footer li:first-child:before {
+    content: '';
+    margin-right: 0;
+  }
+  #footer li:before {
+    content: '\2217';
+    margin-right: 14px;
+  }
+}
+
 
 .navbar, #footer .container > div {
   border-radius: 0;

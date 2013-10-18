@@ -7,21 +7,25 @@
 						class="icon-social icon-social-twitter"
 						style="color: #00acee">
 						<small>
-							@<%= twitter.tweets[0].user.screen_name %>
+							@<%= twitter.user.screen_name %>
 						</small>
 					</a>
 				</div>
 				<div>
-					<b>731</b>
+					<b><%- twitter.user.statuses_count %></b>
 					<small>Tweets</small>
 				</div>
 				<div>
-					<b>36</b>
-					<small>Followers</small>
+					<a href="https://twitter.com/<%= twitter.tweets[0].user.screen_name %>/followers">
+						<b><%- twitter.user.followers_count %></b>
+						<small>Followers</small>
+					</a>
 				</div>
 				<div>
-					<b>60</b>
-					<small>Following</small>
+					<a href="https://twitter.com/<%= twitter.tweets[0].user.screen_name %>/following">
+						<b><%- twitter.user.friends_count %></b>
+						<small>Following</small>
+					</a>
 				</div>
 			</div>
 
@@ -45,21 +49,25 @@
 		<div class="block github">
 			<div class="stats clearfix">
 				<div>
-					<a href="<%= github.repos[0].owner.html_url %>"
+					<a href="<%= github.user.html_url %>"
 						class="icon-social icon-social-github"
 						style="color: #171515">
 						<small>
-							<%= github.repos[0].owner.login %>
+							<%= github.user.login %>
 						</small>
 					</a>
 				</div>
 				<div>
-					<b><%= github.repos.length %></b>
-					<small>Repos</small>
+					<a href="http://github.com/<%= github.user.login %>/repositories">
+						<b><%= github.repos.length %></b>
+						<small>Repos</small>
+					</a>
 				</div>
 				<div>
-					<b><%= github.gists.length %></b>
-					<small>Gists</small>
+					<a href="http://gist.github.com/<%= github.user.login %>">
+						<b><%= github.gists.length %></b>
+						<small>Gists</small>
+					</a>
 				</div>
 				<div>
 					<b>28</b>
@@ -80,6 +88,12 @@
 						</span>
 						<% if (repo.fork) { %>
 						<span class="label label-default">fork</span>
+						<% } %>
+						<% if (1 < repo.watchers_count) { %>
+						<span class="label label-default"><%-repo.watchers_count %> watchers</span>
+						<% } %>
+						<% if (1 < repo.forks_count) { %>
+						<span class="label label-default">forked <%-repo.forks_count %>&#215;</span>
 						<% } %>
 					</p>
 				</div>
@@ -123,7 +137,12 @@
 						<h3>
 							<a href="http://500px.com/photo/<%= photo.id %>"><%= photo.name %></a>
 						</h3>
-						<p><%- photo.description %></p>
+						<p>
+							<%- photo.description %>
+							<% if (1 < photo.votes_count + photo.favorites_count) { %>
+							<span class="label label-default"><%-photo.votes_count + photo.favorites_count %> votes & favorites</span>
+							<% } %>
+						</p>
 					</div>
 				</div>
 				<% }); %>
