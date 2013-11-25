@@ -81,7 +81,8 @@ var exports = module.exports = function (options) {
 			throw new Error('No post data!');
 		}
 		var payload = JSON.stringify(req.body);
-		var filepath = req.app.settings.store + req.profile.type + '.json';
+		var out = req.profile.out || req.profile.type;
+		var filepath = req.app.settings.store + out + '.json';
 		util.log(util.format('writing %s chars to %s', payload.length, filepath));
 		var r = fs.writeFileSync(filepath, JSON.stringify(req.body));
 	}
